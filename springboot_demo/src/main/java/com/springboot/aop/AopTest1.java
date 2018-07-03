@@ -16,7 +16,7 @@ public class AopTest1 {
 	@Around("execution(* com.springboot.controller.FastJsonController..*(..))")
 	public Object method(ProceedingJoinPoint pjp) throws Throwable {
 
-		System.out.println("=====Aspect处理=======");
+		//System.out.println("=====Aspect处理=======");
 		Object[] args = pjp.getArgs();
 		for (Object arg : args) {
 			//args为controllr里方法的数组
@@ -27,7 +27,7 @@ public class AopTest1 {
         //处理controller里具体业务逻辑
 		Object object = pjp.proceed();
 
-		System.out.println("Aspect 耗时:" + (System.currentTimeMillis() - start));
+		//System.out.println("Aspect 耗时:" + (System.currentTimeMillis() - start));
 
 		return object;
 	}

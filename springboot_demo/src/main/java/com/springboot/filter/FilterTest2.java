@@ -14,7 +14,7 @@ import javax.servlet.ServletResponse;
 //2) 添加到过滤器链中，此方式适用于使用第三方的过滤器。将过滤器写到 WebConfig 类中
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(urlPatterns = "/*")//添加此注解，然后在启动类中添加@ServletComponentScan即可
+//@WebFilter(urlPatterns = "/*")//添加此注解，然后在启动类中添加@ServletComponentScan即可
 public class FilterTest2 implements Filter {
 
 	@Override

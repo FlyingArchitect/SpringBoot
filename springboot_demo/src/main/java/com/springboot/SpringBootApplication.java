@@ -1,21 +1,12 @@
 package com.springboot;
 
-import java.util.EnumSet;
 import java.util.Set;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.springboot.filter.FilterTest3;
-
-import com.springboot.listener.ListenerTest2;
-
-import com.springboot.servlet.ServletTest3;
 
 //此处不知为什么@SpringBootApplication不能使用
 @org.springframework.boot.autoconfigure.SpringBootApplication

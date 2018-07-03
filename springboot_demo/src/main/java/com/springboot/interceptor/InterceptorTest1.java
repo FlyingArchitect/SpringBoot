@@ -21,9 +21,9 @@ public class InterceptorTest1 implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		//进入controller之前执行
-		System.out.println("========preHandle1=========");
-		System.out.println(((HandlerMethod) handler).getBean().getClass().getName());
-		System.out.println(((HandlerMethod) handler).getMethod().getName());
+//		System.out.println("========preHandle1=========");
+//		System.out.println(((HandlerMethod) handler).getBean().getClass().getName());
+//		System.out.println(((HandlerMethod) handler).getMethod().getName());
 
 		request.setAttribute("startTime1", System.currentTimeMillis());
 
@@ -35,20 +35,20 @@ public class InterceptorTest1 implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		//controller逻辑执行完成，还没有return
-		System.out.println("========postHandle1=========");
+//		System.out.println("========postHandle1=========");
 		Long start = (Long) request.getAttribute("startTime1");
-		System.out.println("耗时:" + (System.currentTimeMillis() - start));
+//		System.out.println("耗时:" + (System.currentTimeMillis() - start));
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		//controller return后执行,即页面已经显示，此方法一般处理异常
-		System.out.println("========afterCompletion1=========");
+//		System.out.println("========afterCompletion1=========");
 		Long start = (Long) request.getAttribute("startTime1");
-		System.out.println("耗时:" + (System.currentTimeMillis() - start));
-		System.out.println(ex);
-		System.out.println("拦截器结束");
+//		System.out.println("耗时:" + (System.currentTimeMillis() - start));
+//		System.out.println(ex);
+//		System.out.println("拦截器结束");
 
 	}
 

@@ -1,16 +1,22 @@
 package com.springboot.config;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -27,7 +33,10 @@ import com.springboot.servlet.ServletTest;
 
 @Configuration
 public class WeConfig extends WebMvcConfigurerAdapter {
-	/* 配合fastjson使用，但是没有此段代码也可返回json,可以使fastjson注解生效，不知还有没有其它作用 */
+	/*
+	 * 配合fastjson使用，但是没有此段代码也可返回json,可以使fastjson注解生效 使Fastjson注解生效，直接将new
+	 * Date()转换为相应格式的日期
+	 */
 	@Bean
 	public HttpMessageConverters fastJsonHttpMessageConverters() {
 		FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
@@ -99,6 +108,21 @@ public class WeConfig extends WebMvcConfigurerAdapter {
 	// .allowedOrigins("http://localhost:8088");// 允许 8088 端口访问
 	// }
 
-	
+	/**
+	 * 以下代码解决中文乱码问题
+	 * 
+	 * @return
+	 */
+	@Bean
+	public HttpMessageConverter<String> responseBodyConverter() {
+		StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		return converter;
+	}
+
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+		super.configureMessageConverters(converters);
+		converters.add(responseBodyConverter());
+	}
 
 }

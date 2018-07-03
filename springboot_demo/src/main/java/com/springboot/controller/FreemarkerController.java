@@ -12,7 +12,7 @@ public class FreemarkerController {
 	// Freemarker 案例演示
 	@RequestMapping("hello")
 	public String hello(Map<String, Object> map) {
-		// map是session?看起来似的
+		// map是session?看起来是的
 		map.put("msg", "Hello Freemarker");
 		return "hello";
 	}
